@@ -1,0 +1,35 @@
+{
+  "name": "mongodb-m10js",
+  "version": "1.0.0",
+  "description": "Mongodb nodejs class",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "co": "^4.6.0",
+    "http": "^0.0.0",
+    "q": "^1.5.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "consolidate": "^0.14.5",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "nunjucks": "^3.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/mamir/node.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Amir M",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mamir/node#readme"
+}

@@ -1,0 +1,9 @@
+<h1>Hello {{name}}</h1>
+
+<ul>
+    {% for row in rows %}
+        <li>{{row.name}} {{row.age}}</li>
+    {% else %}
+        <li><a href="/get">Show Records</a> </li>
+    {% endfor %}
+</ul>

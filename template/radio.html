@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>radio</title>
+</head>
+<body>
+
+<h2>Show Radio button</h2>
+
+<form name="radios" method="POST" action="/radio_value">
+
+    {% for item in radio %}
+    <div>
+    <label>{{item}}</label>
+    <input name="radio" type="radio" value="{{item}}">
+    </div>
+    {% else %}
+    <span>No records</span>
+    {% endfor %}
+
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
