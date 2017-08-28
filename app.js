@@ -4,58 +4,55 @@ const express = require('express');
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser');
 // const assert = require('assert');
+const commandLineArgs = require('command-line-args');
 
 let mc = mongodb.MongoClient;
 let app = express();
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+/*
+let mongoSimple  = require("./modules/week1-2/mongo-simple");
+mongoSimple();
+*/
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+/*
+// let server  = require("./modules/week1-2server");
+server();
+*/
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+/*
 app.engine("html", engines.nunjucks);
 app.set('view engine', 'html');
 app.set('views', __dirname + "/template")
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+*/
+
 // app.use(app.router);
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 
-app.get("/", function (req, res, next) {
-    res.render("index", {'name': 'amir'});
-});
+/*
+// let mongoExpress  = require("./modules/week1-2mongo-express");
 
-app.get("/:name", function (req, res, next) {
-
-    let first = req.params.name;
-
-    if (first == 'get') {
-        mc.connect("mongodb://localhost:27017/test", function (err, db) {
-
-            db.collection("test.movies").find({}).toArray(function (errs, rows) {
-
-                res.render("index", {"name": "amir", "rows": rows});
-
-                db.close();
-            });
-        });
-    }
-
-    if (first == 'radio') {
-        res.render("radio", {"radio": ["apple", "orange", "mango", "banana"]});
-    }
-
-});
-
-
-app.post("/radio_value", function (req, res, next) {
-
-    let fruit = req.body.radio;
-    if (typeof fruit == 'undefined') {
-        return next(Error('failed to find fruit, please go back and submit it again'));
-    }
-    else {
-        res.send("fruit " + fruit)
-    }
-
-});
+app.get("/", mongoExpress.rootCall);
+app.get("/:name", mongoExpress.nameCall);
+app.post("/radio_value", mongoExpress.radioValue);
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -65,28 +62,39 @@ app.use(function(err, req, res, next) {
     });
 });
 app.listen(3000);
+*/
 
 
-// mc.connect("mongodb://localhost:27017/test", function(err, db){
-//
-//     console.log("Successfully connected to server");
-//
-//     db.collection("test.movies").find({}).toArray(function(err, rows){
-//
-//         rows.forEach(function(row){
-//             console.log(row.name + " " + row.age)
-//         });
-//
-//         db.close();
-//     })
-//
-// });
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////// Week 3 //////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
-// var server = http.createServer(function(req,res){
-//
-//     res.writeHead(200, {"Content-Type": "text/plain"});
-//     res.end("hello world");
-//
-// }).listen(3000);
-//
+// var search = require("./modules/week4/mongo-search");
+// search();
+
+// var SimpleRegex = require("./modules/week4/mongo-regex");
+// SimpleRegex();
+
+// var complexRegex = require("./modules/week4/mongo-regex-comp");
+// complexRegex();
+
+// sorting
+// var SimpleRegex = require("./modules/week4/mongo-regex");
+// SimpleRegex("founded_year");
+
+// Delete
+// var mongoDelete = require("./modules/week4/mongo-delete");
+// mongoDelete();
+
+// Test three
+// var testThree = require("./modules/week4/code/buildingQueryDocuments/buildingQueryDocuments");
+// testThree();
+
+// Test four
+var testFour = require("./modules/week4/code/overviewOrTags/overviewOrTags");
+testFour();
+
+
 console.log("Server is on 3000");

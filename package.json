@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "co": "^4.6.0",
+    "command-line-args": "^4.0.7",
     "http": "^0.0.0",
     "q": "^1.5.0",
     "request": "^2.81.0",

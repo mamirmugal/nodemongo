@@ -145,3 +145,79 @@ db.movieDetails.find({"awards.oscars.award":"bestPicture"}, {title:1, "awards.os
 - db.movieDetails.find({ $and: [{"imdb.votes": {$lt:10000}}, {year:{$gte:2010}}, {year:{$lte:2013}}, { "tomato.consensus": null }, {"tomato.consensus": {$exists:true}}] }, {"imdb.votes":1, year:1, "tomato.consensus":1, _id:false}).count()
 
 - db.movieDetails.updateMany({ $and: [{"imdb.votes": {$lt:10000}}, {year:{$gte:2010}}, {year:{$lte:2013}}, { "tomato.consensus": null }, {"tomato.consensus": {$exists:true}}] }, {$unset: {"tomato.consensus": null }})
+
+
+####################################################################################################
+
+## Week three
+
+### Restore 
+- `mongorestore dump`
+- `mongorestore --host mongodb1.example.net --port 3017 --username user --password 'pass' /opt/backup/mongodump-2013-10-24` 
+- `mongodump --collection myCollection --db test`
+
+### Import
+- `mongoimport -d crunchbase -c companies companies.json`
+
+### multiple instances
+- `mongod --dbpath /usr/local/var/mongodb2 --port 27018 &`
+- this will run the service of mongodb with specific path and port
+
+### Change port
+- `mongod --port 27018 &`
+- this will run instance 
+- press enter and connect to mongodb with `mongo` command
+
+### toArray and Cursor
+- `db.collection('companies').find(query).toArray`
+    - will actually get all the rows from db 
+    - convert to array and return it back
+    - we can use `forEach` async method to iterate throw it
+    
+    
+### Regex 
+- `$options` is used with `$regex`
+- it provided options to regex functionality
+- with the value `"$options":"i"` it will search case insensitive 
+
+
+### Dot notation
+- it is used to to objects and arrays `ipo.amount: {$gte:100}` where db is
+```
+{
+    name: "Amir",
+    ipo:{
+        amount: 360
+    } 
+}
+```
+
+### Sort
+- with value name and `1` for asc and `-1` for desc, in an object
+```
+cursor.sort({year:1});
+```
+- when using multiple sorts we are going to use array in array
+- order of array elements is from left to right
+- left is ordered first and then second, an so on
+```
+cursor.sort([ [year:1], [name: -1] ]);
+```
+
+**NOTE** 
+- `skip, limit, sort` can be of any order
+- mongodb will always, sort first, skip second and limit third
+
+### Twitter [insertOneAndInsertMany folder]
+- `.stream` it will stream data to us one by one
+
+
+### Delete [deleteOneAndDeleteMany folder]
+- sorting is not working because it is exhorting the memory 
+- we need to index or apply limit
+- `db.companies.createIndex({parmalink:1})`
+
+### Problem
+- When using find() in the Node.js driver, which of the following best describes when the driver will send a query to MongoDB?
+    - When we call a cursor method passing a callback function to process query results
+    - because all the sort, limit etc is done in the memory
