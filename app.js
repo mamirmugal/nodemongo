@@ -93,8 +93,11 @@ app.listen(3000);
 // testThree();
 
 // Test four
-var testFour = require("./modules/week4/code/overviewOrTags/overviewOrTags");
-testFour();
+// var testFour = require("./modules/week4/code/overviewOrTags/overviewOrTags");
+// testFour();
+
+var test = require("./modules/mongo-promise");
+test();
 
 
 console.log("Server is on 3000");
