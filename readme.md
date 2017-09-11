@@ -221,3 +221,100 @@ cursor.sort([ [year:1], [name: -1] ]);
 - When using find() in the Node.js driver, which of the following best describes when the driver will send a query to MongoDB?
     - When we call a cursor method passing a callback function to process query results
     - because all the sort, limit etc is done in the memory
+    
+
+####################################################################################################
+
+## Week four
+
+
+### Application driven schema
+- Rich documents
+- no joins (hard to scale) but pre joins within documents
+- no constraints (no foreign key constraint)
+- support atomic operations (no transactions)
+- no declared schema (but application has schema)
+
+**NOTE: single most important factor to design you application schema with mongo?**
+**NOTE: is to match the data access patterns of your application**
+
+
+
+### Goals of normalization (relational db)
+- Frees the database from modification anomalies 
+    - For MongoDB, it looks like embedding data would mostly cause this. And in fact, we should try to avoid embedding data in documents in MongoDB which possibly create these anomalies. Occasionally, we might need to duplicate data in the documents for performance reasons. However that's not the default approach. The default is to avoid it.
+- Should minimize re-design when extending 
+    - MongoDB is flexible enough because it allows addition of keys without re-designing all the documents
+- Avoid bias toward any particular access pattern 
+    - this is something, we're not going to worry about when describing schema in MongoDB. And one of the ideas behind the MongoDB is to tune up your database to the applications that we're trying to write and the problem we're trying to solve.
+
+
+
+### Module of blog in mongodb
+- atomic operations, happen which happens and or not happens at all.
+- update, findAndModify, $addToSet, $push
+
+
+
+### One to One Relationship
+- frequency of access
+    - if collections are frequently accessed then keep it separate collections
+- size of the items, above 16mb cannot be embedded
+    - if the size is very large then keep it different collections
+- atomicity
+
+
+
+### One to Many Relationship
+- in embedded document
+    - size, it can be large so separate document is needed
+    - redundancy, data duplication
+- true linking
+    - linking foreign key, with id as unique name
+    - it requires 2 collections
+- `one to few`, embedded is best options
+
+
+
+### Many to Many Relations
+- we have a an key with array with ids in them
+- embedded, only if the relations is limited 
+
+
+
+### Multikeys
+- multi key indexes, `db.students.ensureIndex({'teacher':1})`
+- `db.students.find({'teacher':{$all:[0,1]}})`, getting students with teacher 0,1
+
+
+
+### Benefits of Embedding
+- performance benefits, read performance
+- depends on access patterns
+
+
+
+### Trees
+- in relations db, table keep parent_id, but in multi level to access the top level parent, we need to query all tables and their parent
+- in mongodb we can kee the list of the parent in one array, in asc order `parents: [2,5,8,9]`
+
+
+
+
+### Demoralize
+- in one to one relation, can be embedded
+- in one to many relation, 
+    - embedded will work from many to one
+    - but in one to many then linking will work
+- in many to many relation, then linking
+
+
+
+
+
+
+
+
+
+
+
